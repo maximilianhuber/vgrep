@@ -15,7 +15,9 @@ parseGrepOutput :: [Text] -> [FileLineReference]
 parseGrepOutput = catMaybes . fmap parseLine
 
 parseLine :: Text -> Maybe FileLineReference
-parseLine line = maybeResult (parse lineParser line)
+parseLine line = case parseOnly lineParser line of
+    Left  _      -> Nothing
+    Right result -> Just result
 
 lineParser :: Parser FileLineReference
 lineParser = do
