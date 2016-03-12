@@ -10,9 +10,9 @@ import Data.Monoid
 import Data.Ratio
 import Data.Sequence (Seq)
 import qualified Data.Sequence as S
-import Data.Text.Lazy (Text)
-import qualified Data.Text.Lazy as T
-import qualified Data.Text.Lazy.IO as T
+import Data.Text (Text)
+import qualified Data.Text as T
+import qualified Data.Text.IO as T
 import qualified Graphics.Vty as Vty
 import Graphics.Vty.Input.Events hiding (Event)
 import Graphics.Vty.Picture

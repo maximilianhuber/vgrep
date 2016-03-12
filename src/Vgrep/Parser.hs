@@ -5,9 +5,9 @@ module Vgrep.Parser
     ) where
 
 import Control.Applicative
-import Data.Attoparsec.Text.Lazy
+import Data.Attoparsec.Text
 import Data.Maybe
-import Data.Text.Lazy
+import Data.Text
 
 import Vgrep.Results
 
@@ -21,5 +21,5 @@ lineParser :: Parser FileLineReference
 lineParser = do
     file       <- manyTill anyChar (char ':')
     lineNumber <- optional (decimal <* char ':')
-    result     <- takeLazyText
+    result     <- takeText
     return (File (pack file), (lineNumber, result))

@@ -25,8 +25,8 @@ import Control.Monad.State.Extended
 import Data.Foldable
 import Data.Maybe
 import Data.Monoid
-import Data.Text.Lazy (Text)
-import qualified Data.Text.Lazy as T
+import Data.Text (Text)
+import qualified Data.Text as T
 import Graphics.Vty.Image hiding ((<|>))
 import Graphics.Vty.Input
 import Graphics.Vty.Prelude
@@ -146,15 +146,15 @@ renderLine width lineNumberWidth displayLine = do
     justifyRight w s = T.justifyRight (fromIntegral w) ' ' (s <> " ")
 
     renderFileHeader :: Attr -> File -> Image
-    renderFileHeader attr = text attr . padWithSpace width . getFileName
+    renderFileHeader attr = text' attr . padWithSpace width . getFileName
 
     renderLineNumber :: Attr -> Maybe Int -> Image
-    renderLineNumber attr = text attr
+    renderLineNumber attr = text' attr
                           . justifyRight lineNumberWidth
                           . maybe "" (T.pack . show)
 
     renderLineText :: Attr -> Text -> Image
-    renderLineText attr = text attr
+    renderLineText attr = text' attr
                         . padWithSpace (width - lineNumberWidth)
 
 

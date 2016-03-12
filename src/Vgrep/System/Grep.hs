@@ -9,8 +9,8 @@ import Control.Monad
 import Control.Monad.IO.Class
 import Control.Concurrent
 import Data.Maybe
-import Data.Text.Lazy (Text)
-import qualified Data.Text.Lazy as T
+import Data.Text (Text)
+import qualified Data.Text as T
 import Pipes as P
 import qualified Pipes.Prelude as P
 import System.Environment (getArgs)

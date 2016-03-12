@@ -16,8 +16,8 @@ import Control.Monad.State.Extended (put, modify)
 import Data.Foldable
 import Data.Set (Set)
 import qualified Data.Set as S
-import Data.Text.Lazy (Text)
-import qualified Data.Text.Lazy as T
+import Data.Text (Text)
+import qualified Data.Text as T
 import Graphics.Vty.Image hiding (resize)
 import Graphics.Vty.Input
 import Graphics.Vty.Prelude
