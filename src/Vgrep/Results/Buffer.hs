@@ -14,16 +14,22 @@ module Vgrep.Results.Buffer
     ) where
 
 import           Control.Applicative
-import           Data.Maybe
-import           Data.Sequence ( Seq , (<|), (|>)
-                               , ViewL(..), ViewR(..)
-                               , viewl, viewr )
-import qualified Data.Sequence as S
 import           Data.Foldable
 import           Data.Function
-import           Data.List (groupBy)
+import           Data.List           (groupBy)
+import           Data.Maybe
 import           Data.Monoid
-import           Prelude hiding (reverse)
+import           Data.Sequence
+    ( Seq
+    , ViewL (..)
+    , ViewR (..)
+    , viewl
+    , viewr
+    , (<|)
+    , (|>)
+    )
+import qualified Data.Sequence       as S
+import           Prelude             hiding (reverse)
 
 import Vgrep.Results
 

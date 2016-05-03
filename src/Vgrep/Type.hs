@@ -1,8 +1,8 @@
+{-# LANGUAGE FlexibleInstances          #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
-{-# LANGUAGE MultiParamTypeClasses #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE TupleSections #-}
-{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE MultiParamTypeClasses      #-}
+{-# LANGUAGE TupleSections              #-}
+{-# LANGUAGE TypeFamilies               #-}
 module Vgrep.Type
   ( VgrepT ()
   , Vgrep
@@ -19,13 +19,13 @@ module Vgrep.Type
   , module Vgrep.Environment
 ) where
 
-import qualified Control.Exception as E
-import Control.Lens.Internal.Zoom
-import Control.Lens.Zoom
-import Control.Monad.Identity
-import Control.Monad.Morph
-import Control.Monad.Reader
-import Control.Monad.State.Extended
+import qualified Control.Exception            as E
+import           Control.Lens.Internal.Zoom
+import           Control.Lens.Zoom
+import           Control.Monad.Identity
+import           Control.Monad.Morph
+import           Control.Monad.Reader
+import           Control.Monad.State.Extended
 
 import Vgrep.Environment
 

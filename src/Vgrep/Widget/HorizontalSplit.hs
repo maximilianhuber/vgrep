@@ -19,7 +19,7 @@ module Vgrep.Widget.HorizontalSplit
 import Control.Lens
 import Control.Monad.Reader (local)
 import Data.Monoid
-import Graphics.Vty.Image hiding (resize)
+import Graphics.Vty.Image   hiding (resize)
 import Graphics.Vty.Input
 
 import Vgrep.Environment

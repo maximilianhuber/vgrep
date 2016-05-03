@@ -8,7 +8,7 @@ module Vgrep.Widget.Type
 import Graphics.Vty.Image (Image)
 import Graphics.Vty.Input
 
-import Vgrep.Event (Redraw (..), Next (..))
+import Vgrep.Event (Next (..), Redraw (..))
 import Vgrep.Type
 
 data Widget s = Widget

@@ -7,27 +7,27 @@ module Vgrep.App
     , ttyOut
     ) where
 
-import Control.Concurrent.Async
-import Control.Exception
-import Control.Monad.Reader
-import Control.Monad.State (get)
-import Graphics.Vty (Vty)
-import qualified Graphics.Vty as Vty
-import Pipes hiding (next)
-import Pipes.Concurrent
-import Pipes.Prelude as P
-import System.Posix.IO
-import System.Posix.Types (Fd)
+import           Control.Concurrent.Async
+import           Control.Exception
+import           Control.Monad.Reader
+import           Control.Monad.State      (get)
+import           Graphics.Vty             (Vty)
+import qualified Graphics.Vty             as Vty
+import           Pipes                    hiding (next)
+import           Pipes.Concurrent
+import           Pipes.Prelude            as P
+import           System.Posix.IO
+import           System.Posix.Types       (Fd)
 
 import Vgrep.Environment
 import Vgrep.Event
 import Vgrep.Type
 
 data App e s = App
-    { initialize   :: forall m. MonadIO m => m s
-    , liftEvent    :: Vty.Event -> e
-    , handleEvent  :: forall m. MonadIO m => e -> s -> Next (VgrepT s m Redraw)
-    , render       :: forall m. Monad m => VgrepT s m Vty.Picture }
+    { initialize  :: forall m. MonadIO m => m s
+    , liftEvent   :: Vty.Event -> e
+    , handleEvent :: forall m. MonadIO m => e -> s -> Next (VgrepT s m Redraw)
+    , render      :: forall m. Monad m => VgrepT s m Vty.Picture }
 
 
 runApp_ :: App e s -> Config -> Producer e IO () -> IO ()
