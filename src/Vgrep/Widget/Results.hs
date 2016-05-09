@@ -1,21 +1,27 @@
 {-# LANGUAGE Rank2Types        #-}
 {-# LANGUAGE OverloadedStrings #-}
 
-module Vgrep.Widget.Results
-    ( ResultsState()
+module Vgrep.Widget.Results (
+    -- * Results list widget
+      resultsWidget
     , ResultsWidget
-    , resultsWidget
 
+    -- ** Internal widget state
+    , ResultsState ()
+
+    -- ** Widget actions
     , feedResult
     , prevLine
     , nextLine
     , pageUp
     , pageDown
 
+    -- ** Lenses
     , currentFileName
     , currentLineNumber
     , currentFileResultLineNumbers
 
+    -- * Re-exports
     , module Vgrep.Results
     ) where
 
@@ -44,6 +50,24 @@ type ResultsState = Buffer
 
 type ResultsWidget = Widget ResultsState
 
+-- | The results widget displays a list of lines with line numbers, grouped
+-- by files.
+--
+-- * __Initial state__
+--
+--     The initial buffer is empty and can be filled line by line using
+--     'feedResult'.
+--
+-- * __Drawing the results list__
+--
+--     FIXME
+--
+-- * __Default keybindings__
+--
+--     @
+--     jk, ↓↑      'nextLine', 'prevLine'
+--     PgDn, PgUp  'pageDown', 'pageUp'
+--     @
 resultsWidget :: ResultsWidget
 resultsWidget =
     Widget { initialize = initResults
@@ -52,7 +76,6 @@ resultsWidget =
 
 initResults :: ResultsState
 initResults = emptyBuffer
-
 
 resultsKeyBindings
     :: Monad m
@@ -68,11 +91,16 @@ resultsKeyBindings = dispatchMap $ fromList
     , (EvKey (KChar 'k') [], prevLine >> pure Redraw)
     , (EvKey (KChar 'j') [], nextLine >> pure Redraw) ]
 
+
+-- | Add a line to the results list. If the result is found in the same
+-- file as the current last result, it will be added to the same results
+-- group, otherwise a new group will be opened.
 feedResult :: Monad m => FileLineReference -> VgrepT ResultsState m Redraw
 feedResult line = do
     modify (feed line)
     resizeToWindow
 
+-- | Move up/down one results page. File group headers will be skipped.
 pageUp, pageDown :: Monad m => VgrepT ResultsState m ()
 pageUp = do
     unlessS (isJust . moveUp) $ do
@@ -91,7 +119,7 @@ repeatedly f = go
     go x | Just x' <- f x = go x'
          | otherwise      = x
 
-
+-- | Move up/down one results line. File group headers will be skipped.
 prevLine, nextLine :: Monad m => VgrepT ResultsState m ()
 prevLine = maybeModify tryPrevLine >> void resizeToWindow
 nextLine = maybeModify tryNextLine >> void resizeToWindow
